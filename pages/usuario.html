@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Atividade 03</title>
+    <link rel="stylesheet" type="text/css" href="/css/web.css">
+    <style>
+        .showParams {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="div_principal">
+        <header id="cabecalho">
+            <nav id="navegador">
+                <ul>
+                    <li><a href="/pages/site.html" target="_self">Início</a></li>
+                    <li><a href="/pages/formulario.html" target="_self">Cadastro de Clientes</a></li>
+                    <li><a href="/pages/produtos.html" target="_self">Lista de Produtos</a></li>
+                    <li><a href="/pages/download.html" target="_self">Download</a></li>
+                    <li><a href="/pages/imagens.html" target="_self">Imagens</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="div_conteudo">
+
+            <h1 style="text-align:center;">Parâmetros na URL</h1>
+
+            <div class="showParams">
+                <p id="paramId"></p>
+                <p id="paramNome"></p>
+            </div>
+
+            
+        </div>
+
+        <footer id="rodape">
+            <p>Autor: André Archanjo Nunes Coelho</p>
+            <p>Contato: <a href="mailto:archanjoandre@yahoo.com.br">archanjoandre@yahoo.com.br</a></p>
+        </footer>
+    </div>
+
+    <script>
+        function getParams() {
+            const pathParts = window.location.pathname.split('/');
+            const idIndex = pathParts.indexOf('usuario.html') + 1;
+            const nomeIndex = idIndex + 1;
+            const id = pathParts[idIndex];
+            const nome = pathParts[nomeIndex];
+            return { id, nome };
+        }
+
+        function showParams() {
+            const params = getParams();
+            const divParams = document.querySelector('.showParams');
+            const paramId = document.querySelector('#paramId');
+            const paramNome = document.querySelector('#paramNome');
+
+            if (params.id && params.nome) {
+                divParams.style.display = 'block';
+                paramId.textContent = `ID: ${params.id}`;
+                paramNome.textContent = `Nome: ${params.nome}`;
+            } else {
+                divParams.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', showParams);
+    </script>
+</body>
+</html>
